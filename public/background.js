@@ -1,5 +1,3 @@
-console.log("background script");
-
 chrome.webRequest.onBeforeSendHeaders.addListener(
   function (details) {
     const authHeader = details.requestHeaders?.find(
