@@ -17,7 +17,10 @@ export const schema = z
     hours: hoursSchema,
     startDate: z.date(),
     endDate: z.date(),
-    startTime: z.number().min(0).max(24),
+    startTime: z.preprocess(
+      (x) => (x ? x : undefined),
+      z.coerce.number().int().min(1).max(23)
+    ),
   })
   .required()
   .superRefine((data, ctx) => {

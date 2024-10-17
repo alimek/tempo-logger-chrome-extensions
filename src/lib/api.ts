@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const workerId = process.env.TEMPO_WORKER_ID!;
+const workerId = import.meta.env.VITE_TEMPO_WORKER_ID;
 
 export const addSingleWorkLog = async (
   token: string,
@@ -17,7 +17,7 @@ export const addSingleWorkLog = async (
   utcDate.setUTCMinutes((startTime % 1) * 60);
 
   const { data } = await axios.post(
-    process.env.TEMPO_URL!,
+    import.meta.env.VITE_TEMPO_URL,
     {
       attributes: {},
       billableSeconds: hours * 3600,

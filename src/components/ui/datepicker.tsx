@@ -15,7 +15,7 @@ import {
 
 type DatePickerProps = ComponentProps<typeof Calendar> & {
   date: Date | undefined;
-  setDate: (date: Date | undefined) => void;
+  setDate: (date: Date) => void;
 };
 
 export function DatePicker({ date, setDate, ...props }: DatePickerProps) {

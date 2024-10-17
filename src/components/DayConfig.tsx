@@ -11,6 +11,7 @@ import { useState } from "react";
 import SaveModal from "./SaveModal";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+
 export function DayConfig() {
   const [isOpen, setIsOpen] = useState(false);
   const initStartDate = new Date();
@@ -100,6 +101,7 @@ export function DayConfig() {
                   type="number"
                   value={field.value}
                   onChange={field.onChange}
+                  pattern="[0-9]*"
                   className={cn("w-20", !!fieldState.error && "border-red-500")}
                 />
               </div>

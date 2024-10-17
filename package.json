@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build:vite": "vite build",
-    "dev": "nodemon --watch index.html --watch src --watch public --ext ts,json,tsx,html,css,js --exec 'yarn build:vite'",
+    "build": "vite build",
+    "dev": "nodemon --watch index.html --watch src --watch public --ext ts,json,tsx,html,css,js --exec 'yarn build'",
     "generate": "turbo build",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"

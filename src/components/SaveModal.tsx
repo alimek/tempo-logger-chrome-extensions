@@ -42,6 +42,7 @@ const generateDatesWithoutWeekends = (
 const SaveModal: React.FC<SaveModalProps> = ({ isOpen, onClose, config }) => {
   const [saved, setSaved] = useState(false);
   const [completedDays, setCompletedDays] = useState(0);
+  const [erroredDays, setErroredDays] = useState(0);
   const daysToSave = useMemo(() => {
     if (isOpen) {
       setCompletedDays(0);
@@ -65,6 +66,11 @@ const SaveModal: React.FC<SaveModalProps> = ({ isOpen, onClose, config }) => {
         setSaved(true);
       }
     }
+  };
+
+  const handleDayError = () => {
+    setCompletedDays((prev) => prev + 1);
+    setErroredDays((prev) => prev + 1);
   };
 
   const isComplete = completedDays === daysToSave.length;
@@ -92,12 +98,18 @@ const SaveModal: React.FC<SaveModalProps> = ({ isOpen, onClose, config }) => {
               hours={config.hours}
               startTime={config.startTime}
               onComplete={handleDayComplete}
+              onError={handleDayError}
             />
           ))}
         </div>
-        {saved && (
+        {erroredDays === 0 && saved && (
           <div className="text-green-500 text-xl font-bold text-center">
             Saved!
+          </div>
+        )}
+        {erroredDays > 0 && (
+          <div className="text-red-500 text-xl font-bold text-center">
+            {erroredDays} days errored
           </div>
         )}
         <div className="flex justify-end space-x-2">

@@ -8,6 +8,7 @@ interface SingleDayMutationProps {
   day: string;
   hours: Hours;
   onComplete: () => void;
+  onError: () => void;
   startTime: number;
 }
 
@@ -15,6 +16,7 @@ const SingleDayMutation: React.FC<SingleDayMutationProps> = ({
   day,
   hours,
   onComplete,
+  onError,
   startTime,
 }) => {
   const token = useToken();
@@ -45,18 +47,23 @@ const SingleDayMutation: React.FC<SingleDayMutationProps> = ({
       });
 
       let time = startTime;
-      for (const task of toSaveTasks) {
-        if (task) {
-          await mutateAsync({
-            day,
-            task: task.task,
-            hours: task.hours,
-            time: time,
-          });
-          time += task.hours;
+      try {
+        for (const task of toSaveTasks) {
+          if (task) {
+            await mutateAsync({
+              day,
+              task: task.task,
+              hours: task.hours,
+              time: time,
+            });
+            time += task.hours;
+          }
         }
+        onComplete();
+      } catch (_e) {
+        console.error(_e);
+        onError();
       }
-      onComplete();
     };
 
     saveEveryTask();
