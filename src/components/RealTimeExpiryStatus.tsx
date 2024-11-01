@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useClearToken, useExpiryDate } from "../stores/token";
+import { useClearToken, useExpiryDate, useWorkerId } from "../stores/token";
 
 export function RealTimeExpiryStatus() {
   const expiryDate = useExpiryDate();
   const clearToken = useClearToken();
+  const workerId = useWorkerId();
 
   const [expiryString, setExpiryString] = useState<string>("");
 
@@ -44,5 +45,10 @@ export function RealTimeExpiryStatus() {
     return () => clearInterval(intervalId);
   }, [clearToken, expiryDate]);
 
-  return <div className="text-sm text-green-500">{expiryString}</div>;
+  return (
+    <div className="flex flex-col gap-2">
+      <span className="text-sm text-green-500">{expiryString}</span>
+      <span className="text-sm">User ID: {workerId}</span>
+    </div>
+  );
 }

@@ -4,6 +4,7 @@ import {
   useSetToken,
   useToken,
   useClearToken,
+  useSetWorkerId,
 } from "@/stores/token";
 import { useEffect } from "react";
 import { RealTimeExpiryStatus } from "./RealTimeExpiryStatus";
@@ -13,9 +14,10 @@ export function TokenStatus() {
   const setToken = useSetToken();
   const setExpiryDate = useSetExpiryDate();
   const clearToken = useClearToken();
+  const setWorkerId = useSetWorkerId();
 
   useEffect(() => {
-    chrome.storage.local.get(["token", "expiryDate"], (data) => {
+    chrome.storage.local.get(["token", "expiryDate", "workerId"], (data) => {
       if (new Date() > new Date(data.expiryDate)) {
         clearToken();
         return;
@@ -23,6 +25,7 @@ export function TokenStatus() {
 
       setToken(data.token);
       setExpiryDate(data.expiryDate);
+      setWorkerId(data.workerId);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

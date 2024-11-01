@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { addSingleWorkLog } from "../lib/api";
 import { tasks, type Hours } from "./schema";
-import { useToken } from "@/stores/token";
+import { useToken, useWorkerId } from "@/stores/token";
 
 interface SingleDayMutationProps {
   day: string;
@@ -20,6 +20,7 @@ const SingleDayMutation: React.FC<SingleDayMutationProps> = ({
   startTime,
 }) => {
   const token = useToken();
+  const workerId = useWorkerId();
 
   const { mutateAsync } = useMutation({
     mutationFn: ({
@@ -32,7 +33,7 @@ const SingleDayMutation: React.FC<SingleDayMutationProps> = ({
       task: string;
       hours: number;
       time: number;
-    }) => addSingleWorkLog(token!, day, task, hours, time),
+    }) => addSingleWorkLog(token!, workerId!, day, task, hours, time),
   });
 
   React.useEffect(() => {

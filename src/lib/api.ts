@@ -1,9 +1,8 @@
 import axios from "axios";
 
-const workerId = import.meta.env.VITE_TEMPO_WORKER_ID;
-
 export const addSingleWorkLog = async (
   token: string,
+  workerId: string,
   day: string,
   originTaskId: string,
   hours: number,
