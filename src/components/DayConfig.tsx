@@ -20,7 +20,7 @@ export function DayConfig() {
   const form = useForm<DayConfig>({
     defaultValues: {
       hours: {
-        "TT-1": 0,
+        "TT-7": 0,
         "TT-2": 0,
         "TT-3": 0,
         "TT-4": 0,

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const tasks = [
-  { name: "TT-1", description: "New development", taskId: "378774" },
+  { name: "TT-7", description: "New development", taskId: "384502" },
   { name: "TT-2", description: "Maintenance work", taskId: "378775" },
   { name: "TT-3", description: "Other work", taskId: "378776" },
   { name: "TT-4", description: "Holiday", taskId: "378777" },
